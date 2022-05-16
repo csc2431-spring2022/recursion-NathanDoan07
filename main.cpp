@@ -11,7 +11,7 @@ using std::ostream;
 unsigned long long int Fibonacci(unsigned int n);
 void PrintReverseString(const string& str, ostream& output = cout);
 // You may change the parameters of these functions
-size_t MinimumPosition(const int array[], size_t size);
+size_t MinimumPosition(const int array[], size_t size, size_t position = 0, size_t minPosition = 0);
 void SelectionSort(int array[], size_t size);
 
 
@@ -85,14 +85,40 @@ int main() {
 }
 
 unsigned long long int Fibonacci(unsigned int n){
-	return 0;
+    if ((n == 1) || (n == 0)) {
+        return n;
+    } else {
+        return Fibonacci(n-1) + Fibonacci(n-2);
+    }
 }
-void PrintReverseString(const string& str, ostream& output){
+void PrintReverseString(const string& str, ostream& output) {
+    size_t size = str.size();
+    if (size == 0) {
+        output << str << endl;
+    }
+    else {
+        output << str[size - 1];
+        return PrintReverseString(str.substr(0, size - 1));
+    }
+
 }
 // You may change the parameters of these functions
-size_t MinimumPosition(const int array[], size_t size){
-	return 0;
+size_t MinimumPosition(const int array[], size_t size, size_t position, size_t minPosition){
+    if (position > size) {
+        return 0;
+    }
+    if (position == size) {
+        return minPosition;
+    }
+    else
+    if (array[position] < array[minPosition]) {
+        return MinimumPosition(array, size, position+1, position);
+    } else {
+        return MinimumPosition(array, size, position+1, minPosition);
+    }
 }
 void SelectionSort(int array[], size_t size){
+
+
 
 }
