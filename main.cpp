@@ -8,6 +8,7 @@ using std::stringstream ;
 using std::string;
 using std::ostream;
 
+
 unsigned long long int Fibonacci(unsigned int n);
 void PrintReverseString(const string& str, ostream& output = cout);
 // You may change the parameters of these functions
@@ -93,14 +94,18 @@ unsigned long long int Fibonacci(unsigned int n){
 }
 void PrintReverseString(const string& str, ostream& output) {
     size_t size = str.size();
-    if (size == 0) {
-        output << str << endl;
+    if (str.size() == 0) {
+        output << str;
     }
     else {
-        output << str[size - 1];
-        return PrintReverseString(str.substr(0, size - 1));
+        if (size == 1) {
+            output << str;
+        }
+        else {
+            output << str[size - 1];
+            return PrintReverseString(str.substr(0, size-1), output);
+        }
     }
-
 }
 // You may change the parameters of these functions
 size_t MinimumPosition(const int array[], size_t size, size_t position, size_t minPosition){
@@ -117,8 +122,17 @@ size_t MinimumPosition(const int array[], size_t size, size_t position, size_t m
         return MinimumPosition(array, size, position+1, minPosition);
     }
 }
+
 void SelectionSort(int array[], size_t size){
-
-
-
+    for (int j = 0; j < size - 1; j++) {
+        int min = j;
+        for (int k = j + 1; k < size; k++) {
+            if (array[k] < array[j]) {
+                min = k;
+                int temp = array[k];
+                array[k] = array[min];
+                array[min] = temp;
+            }
+        }
+    }
 }
